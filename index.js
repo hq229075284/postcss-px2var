@@ -16,7 +16,7 @@ module.exports = (opts = {}) => {
     Declaration (decl, postcss) {
       // The faster way to find Declaration node
       if(/\d+px/.test(decl.value)){
-        decl.value=decl.value.replace(/\d+px/g,`var('--base')`)
+        decl.cloneAfter({value:decl.value.replace(/\d+px/g,`var(--base)`)})
       }
     }
 
