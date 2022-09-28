@@ -20,7 +20,7 @@ module.exports = postcss.plugin('postcss-px2var', (opts = { }) => {
           return
         }
         if(/\d+px/.test(decl.value)){
-          const val={value:decl.value.replace(/(-?\d+)px/g,($0)=>`calc(${$0} * var(--${options.varName}))`)}
+          const val={value:decl.value.replace(/(-?\d+)px/g,($0)=>`calc(${$0} * var(--${options.varName}, 1))`)}
           decl.cloneAfter(val)
           skip=true// 跳过插入的行
         }

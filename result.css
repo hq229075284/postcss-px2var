@@ -1,4 +1,4 @@
 body{
   width: 10px;
-  width: calc(10px * var(--postcss-px2var-unit));
+  width: calc(10px * var(--postcss-px2var-unit, 1));
 }
