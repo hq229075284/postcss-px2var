@@ -8,8 +8,12 @@
     "postcss-plugin",
     "postcss-px2var"
   ],
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
-    "test": "jest --coverage && eslint ."
+    "test": "jest"
   },
   "author": "hanqing",
   "license": "MIT",
@@ -18,18 +22,18 @@
     "node": ">=12.0.0"
   },
   "peerDependencies": {
-    "postcss": "^8.3.0"
+    "postcss": "^7.0.39"
   },
   "devDependencies": {
     "clean-publish": "^3.4.2",
     "eslint": "^8.0.1",
     "eslint-plugin-jest": "^25.2.2",
     "jest": "^27.3.1",
-    "postcss": "^8.3.11"
+    "postcss": "^7.0.39"
   },
   "eslintConfig": {
     "parserOptions": {
-      "ecmaVersion": 2017
+      "ecmaVersion": 2020
     },
     "env": {
       "node": true,
@@ -40,7 +44,11 @@
       "plugin:jest/recommended"
     ],
     "rules": {
-      "jest/expect-expect": "off"
+      "jest/expect-expect": "off",
+      "indent": [
+        "error",
+        2
+      ]
     }
   },
   "jest": {

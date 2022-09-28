@@ -1,34 +1,31 @@
+/* eslint-disable no-unused-vars */
 /**
  * @type {import('postcss').PluginCreator}
  */
-module.exports = (opts = {}) => {
-  // Work with options here
+let postcss = require('postcss')
 
-  return {
-    postcssPlugin: 'postcss-px2var',
-    /*
-    Root (root, postcss) {
-      // Transform CSS AST here
-    }
-    */
-
-
-    Declaration (decl, postcss) {
-      // The faster way to find Declaration node
-      if(/\d+px/.test(decl.value)){
-        decl.cloneAfter({value:decl.value.replace(/\d+px/g,`var(--base)`)})
-      }
-    }
-
-
-    /*
-    Declaration: {
-      color: (decl, postcss) {
-        // The fastest way find Declaration node if you know property name
-      }
-    }
-    */
+module.exports = postcss.plugin('postcss-px2var', (opts = { }) => {
+  const options={
+    varName:'postcss-px2var-unit',
+    ...opts
   }
-}
+  // Work with options here
+  return (root, result) => {
+    if(!options.includes || options.includes.some(include=>include.test(root.source.input.file))){
+      // Transform CSS AST here
+      let skip=false
+      root.walkDecls((decl)=>{
+        if(skip) {
+          skip=false
+          return
+        }
+        if(/\d+px/.test(decl.value)){
+          const val={value:decl.value.replace(/(-?\d+)px/g,($0)=>`calc(${$0} * var(--${options.varName}))`)}
+          decl.cloneAfter(val)
+          skip=true// 跳过插入的行
+        }
+      })
+    }
+  }
+})
 
-module.exports.postcss = true
