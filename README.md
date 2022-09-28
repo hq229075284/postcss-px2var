@@ -1,18 +1,21 @@
 # postcss-px2var
 
-[PostCSS] plugin 123.
+[PostCSS] plugin postcss-px2var.
 
 [PostCSS]: https://github.com/postcss/postcss
 
 ```css
 .foo {
   /* Input example */
+  width:10px;
 }
 ```
 
 ```css
 .foo {
   /* Output example */
+  width:10px;
+  width:calc(10px * var(--varName));
 }
 ```
 
@@ -36,7 +39,16 @@ and set this plugin in settings.
 ```diff
 module.exports = {
   plugins: [
-+   require('postcss-px2var'),
++   require('postcss-px2var')({varName:'unit'}),
+    require('autoprefixer')
+  ]
+}
+```
+or
+```diff
+module.exports = {
+  plugins: [
++   require('postcss-px2var')({varName:'unit',includes:[/regexp/]}),
     require('autoprefixer')
   ]
 }
