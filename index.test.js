@@ -17,13 +17,27 @@ test('transform', async () => {
 test('varName', async () => {
   const sourceCss=fs.readFileSync('./source.css',{encoding:'utf8'})
   const resultCss=fs.readFileSync('./result.css',{encoding:'utf8'})
-  await run(sourceCss, resultCss.replace('postcss-px2var-unit','unit'), { varName:'unit' })
+  await run(sourceCss, resultCss.replace(/postcss-px2var-unit/g,'unit'), { varName:'unit' })
 })
 
 test('includes', async () => {
   const sourceCss=fs.readFileSync('./source.css',{encoding:'utf8'})
   // const resultCss=fs.readFileSync('./result.css')
   await run(sourceCss, sourceCss, { includes:[] })
+})
+
+test('selectorBlacklist', async () => {
+  const sourceCss=fs.readFileSync('./source.css',{encoding:'utf8'})
+  const resultCss=`body{
+  width: 10px;
+  width: calc(10px * var(--postcss-px2var-unit, 1));
+}
+
+.black{
+  width: 1.1px;
+}
+`
+  await run(sourceCss, resultCss, { selectorBlacklist:[/black/] })
 })
 
 

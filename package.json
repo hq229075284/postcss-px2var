@@ -1,5 +1,5 @@
 {
-  "name": "postcss-px2var",
+  "name": "@dc/postcss-px2var",
   "version": "0.0.1",
   "description": "PostCSS plugin px to css var",
   "keywords": [
