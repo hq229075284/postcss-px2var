@@ -4,18 +4,43 @@
 
 [PostCSS]: https://github.com/postcss/postcss
 
+1. with config: { varName:'unit' }
 ```css
+/* Input example */
 .foo {
-  /* Input example */
   width:10px;
 }
 ```
 
 ```css
+/* Output example */
 .foo {
-  /* Output example */
   width:10px;
-  width:calc(10px * var(--varName));
+  width:calc(10px * var(--unit));
+}
+```
+
+2. with config: { varName:'unit',selectorBlacklist:[/abc/] }
+```css
+/* Input example */
+.foo {
+  width:10px;
+}
+
+.abc {
+  width:1.1px;
+}
+```
+
+```css
+/* Output example */
+.foo {
+  width:10px;
+  width:calc(10px * var(--unit));
+}
+
+.abc {
+  width:1.1px;
 }
 ```
 
