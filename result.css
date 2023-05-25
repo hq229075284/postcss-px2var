@@ -1,9 +1,9 @@
 body{
   width: 10px;
-  width: calc(10px * var(--postcss-px2var-unit, 1));
+  width: calc(10px * var(--postcss-px2var-scale, 1));
 }
 
 .black{
   width: 1.1px;
-  width: calc(1.1px * var(--postcss-px2var-unit, 1));
+  width: calc(1.1px * var(--postcss-px2var-scale, 1));
 }

@@ -17,7 +17,7 @@ test('transform', async () => {
 test('varName', async () => {
   const sourceCss=fs.readFileSync('./source.css',{encoding:'utf8'})
   const resultCss=fs.readFileSync('./result.css',{encoding:'utf8'})
-  await run(sourceCss, resultCss.replace(/postcss-px2var-unit/g,'unit'), { varName:'unit' })
+  await run(sourceCss, resultCss.replace(/postcss-px2var-scale/g,'unit'), { varName:'unit' })
 })
 
 test('includes', async () => {
@@ -30,7 +30,7 @@ test('selectorBlacklist', async () => {
   const sourceCss=fs.readFileSync('./source.css',{encoding:'utf8'})
   const resultCss=`body{
   width: 10px;
-  width: calc(10px * var(--postcss-px2var-unit, 1));
+  width: calc(10px * var(--postcss-px2var-scale, 1));
 }
 
 .black{
@@ -43,11 +43,11 @@ test('selectorBlacklist', async () => {
 test('不创建备份，直接替换源数据', async () => {
   const sourceCss=fs.readFileSync('./source.css',{encoding:'utf8'})
   const resultCss=`body{
-  width: calc(10px * var(--postcss-px2var-unit, 1));
+  width: calc(10px * var(--postcss-px2var-scale, 1));
 }
 
 .black{
-  width: calc(1.1px * var(--postcss-px2var-unit, 1));
+  width: calc(1.1px * var(--postcss-px2var-scale, 1));
 }
 `
   await run(sourceCss, resultCss, { fallback:false })

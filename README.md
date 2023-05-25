@@ -44,6 +44,29 @@
 }
 ```
 
+3. with config: { varName:'unit',selectorBlacklist:[/abc/],fallback:false }
+```css
+/* Input example */
+.foo {
+  width:10px;
+}
+
+.abc {
+  width:1.1px;
+}
+```
+
+```css
+/* Output example */
+.foo {
+  width:calc(10px * var(--unit));
+}
+
+.abc {
+  width:1.1px;
+}
+```
+
 ## Usage
 
 **Step 1:** Install plugin:
@@ -74,6 +97,15 @@ or
 module.exports = {
   plugins: [
 +   require('postcss-px2var')({varName:'unit',includes:[/regexp/]}),
+    require('autoprefixer')
+  ]
+}
+```
+or
+```diff
+module.exports = {
+  plugins: [
++   require('postcss-px2var')({varName:'unit',includes:[/regexp/],fallback:false}),
     require('autoprefixer')
   ]
 }

@@ -6,7 +6,7 @@ let postcss = require('postcss')
 
 module.exports = postcss.plugin('postcss-px2var', (opts = {}) => {
   const options = {
-    varName: 'postcss-px2var-unit',
+    varName: 'postcss-px2var-scale',
     fallback: true,
     ...opts
   }
