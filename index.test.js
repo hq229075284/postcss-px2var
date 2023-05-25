@@ -40,6 +40,19 @@ test('selectorBlacklist', async () => {
   await run(sourceCss, resultCss, { selectorBlacklist:[/black/] })
 })
 
+test('不创建备份，直接替换源数据', async () => {
+  const sourceCss=fs.readFileSync('./source.css',{encoding:'utf8'})
+  const resultCss=`body{
+  width: calc(10px * var(--postcss-px2var-unit, 1));
+}
+
+.black{
+  width: calc(1.1px * var(--postcss-px2var-unit, 1));
+}
+`
+  await run(sourceCss, resultCss, { fallback:false })
+})
+
 
 /* Write tests here
 
